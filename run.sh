@@ -9,19 +9,10 @@ read -p "Enter the full path to the model files directory.  This will be exposed
 MODEL_DIR=$(eval echo $MODEL_DIR)
 
 # Expose ports and run
-if [ $ENVIRONMENT = "PROD" ]
-then
-  sudo docker run -it \
-          -p $HTTP_SERVER_PORT:$HTTP_SERVER_PORT \
-          -p $EXPRESS_APP_PORT:$EXPRESS_APP_PORT \
-          -p $REACT_CLIENT_PORT:$REACT_CLIENT_PORT \
-          -v "$PROJ_DIR":/share \
-          -v "$MODEL_DIR":/share/model \
-          --name $IMAGE_NAME $IMAGE_NAME
-else
-  sudo docker run -it \
-          -p $PUBLIC_PORT:$PUBLIC_PORT \
-          -v "$PROJ_DIR":/share \
-          -v "$MODEL_DIR":/share/model \
-          --name $IMAGE_NAME $IMAGE_NAME
-fi
+sudo docker run -it \
+        -p $HTTP_SERVER_PORT:$HTTP_SERVER_PORT \
+        -p $EXPRESS_APP_PORT:$EXPRESS_APP_PORT \
+        -p $REACT_CLIENT_PORT:$REACT_CLIENT_PORT \
+        -v "$PROJ_DIR":/share \
+        -v "$MODEL_DIR":/share/model \
+        --name $IMAGE_NAME $IMAGE_NAME:$IMAGE_TAG
