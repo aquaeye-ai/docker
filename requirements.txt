@@ -2,3 +2,4 @@ pyyaml
 falcon
 falcon-cors
 numpy
+matplotlib
